@@ -5,6 +5,7 @@ class Product(models.Model):
     cooperation = models.CharField(max_length=100)
     barcode = models.CharField(max_length=13)
     name = models.CharField(max_length=100)
-    
+    is_big_ten = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name

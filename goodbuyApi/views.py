@@ -12,10 +12,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
 
-class product_by_code(generics.ListAPIView):
+class product_by_code(generics.ListCreateAPIView):
     def get_queryset(self):
-        code = self.kwargs['code']
-        return Product.objects.filter(barcode=code)
+        return Product.objects.filter(barcode=self.kwargs["pk"])
     serializer_class = ProductSerializer
 
 class product_by_id(generics.RetrieveDestroyAPIView):
