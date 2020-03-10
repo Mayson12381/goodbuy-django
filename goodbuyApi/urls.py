@@ -14,5 +14,7 @@ urlpatterns = [
     path('feedback/<int:code>', mock.feedback),
     path('feedback/result/<int:code>', mock.result),
     path('goodbuyDatabase/current_categories/', mock.current_categories),
-    path('goodbuyDatabase/product_validation/<int:code>/<Boolean:upvote-counter>/<Boolean:downvote-counter>/', mock.product_validation),
+    path('goodbuyDatabase/product_validation/', mock.product_validation),
+    path('goodbuyDatabase/update_product/', mock.update_product),
+    path('goodbuyDatabase/fridge_karma_feedback/', mock.feedback_fridge_karma),
 ]
