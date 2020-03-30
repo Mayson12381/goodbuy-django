@@ -29,10 +29,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['goodbuy-django.herokuapp.com']
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
+
 
 # Application definition
 INSTALLED_APPS = [
     'goodbuyApi',
+    'django.contrib.postgres',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
