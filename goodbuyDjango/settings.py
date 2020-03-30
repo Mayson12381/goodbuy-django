@@ -1,7 +1,13 @@
+import json
 import os
-import django_heroku
+
+from six.moves.urllib import request
+
 import dj_database_url
+import django_heroku
 import dotenv
+from cryptography.hazmat.backends import default_backend
+from cryptography.x509 import load_pem_x509_certificate
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,17 +40,37 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_jwt',
+    'corsheaders',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.RemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
 ]
 
 ROOT_URLCONF = 'goodbuyDjango.urls'
@@ -128,3 +154,20 @@ DATABASES['default'].update(prod_db)
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+
+JWT_AUTH = {
+    'JWT_PAYLOAD_GET_USERNAME_HANDLER':
+        'auth0authorization.utils.jwt_get_username_from_payload_handler',
+    'JWT_DECODE_HANDLER':
+        'auth0authorization.utils.jwt_decode_token',
+    'JWT_ALGORITHM': 'RS256',
+    'JWT_AUDIENCE': 'https://goodbuy-api',
+    'JWT_ISSUER': 'https://goodbuy.eu.auth0.com/',
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+}
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost:8080',
+]

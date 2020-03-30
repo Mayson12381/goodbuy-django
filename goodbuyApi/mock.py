@@ -104,5 +104,69 @@ def feedback_fridge_karma(params):
                 'corporation': 'Danone'
             },
         },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 1',
+                'brand': 'Red Bull',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 2',
+                'brand': 'Vittel',
+                'corporation': 'Nestlé'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 3',
+                'brand': 'Mock Brand',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 4',
+                'brand': 'Evian',
+                'corporation': 'Danone'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 1',
+                'brand': 'Red Bull',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 2',
+                'brand': 'Vittel',
+                'corporation': 'Nestlé'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 3',
+                'brand': 'Mock Brand',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 4',
+                'brand': 'Evian',
+                'corporation': 'Danone'
+            },
+        },
     ]
     return JsonResponse(response, safe=False)
