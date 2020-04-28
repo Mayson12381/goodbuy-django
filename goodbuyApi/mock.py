@@ -66,3 +66,107 @@ def current_categories(self):
 
 def product_validation(self, params):
     return JsonResponse(params, status=200)
+
+def update_product(self, params):
+    return JsonResponse(params, status=200)
+
+def feedback_fridge_karma(params):
+    response = [
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 1',
+                'brand': 'Red Bull',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 2',
+                'brand': 'Vittel',
+                'corporation': 'Nestlé'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 3',
+                'brand': 'Mock Brand',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 4',
+                'brand': 'Evian',
+                'corporation': 'Danone'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 1',
+                'brand': 'Red Bull',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 2',
+                'brand': 'Vittel',
+                'corporation': 'Nestlé'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 3',
+                'brand': 'Mock Brand',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 4',
+                'brand': 'Evian',
+                'corporation': 'Danone'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 1',
+                'brand': 'Red Bull',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 2',
+                'brand': 'Vittel',
+                'corporation': 'Nestlé'
+            },
+        },
+        {
+            'is_big_ten': False,
+            'fields': {
+                'name': 'Product 3',
+                'brand': 'Mock Brand',
+                'corporation': 'Mock Corporation'
+            },
+        },
+        {
+            'is_big_ten': True,
+            'fields': {
+                'name': 'Product 4',
+                'brand': 'Evian',
+                'corporation': 'Danone'
+            },
+        },
+    ]
+    return JsonResponse(response, safe=False)
