@@ -32,7 +32,7 @@ class Corporation(models.Model):
 
 class Product(models.Model):
     brand = models.CharField(max_length=100)
-    corporation = models.CharField(max_length=100, default='', db_column="cooperation")
+    corporation = models.CharField(max_length=100, default='')
     barcode = models.CharField(max_length=13, unique=True)
     name = models.CharField(max_length=100)
     is_big_ten = models.BooleanField(default=False, null=True)

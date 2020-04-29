@@ -3,9 +3,11 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000 --settings=goodbuyDjango.settings.development"
     container_name: goodbuy-django-docker
     volumes:
       - .:/goodbuy-django-docker
     ports:
       - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: goodbuyDjango.settings.development
