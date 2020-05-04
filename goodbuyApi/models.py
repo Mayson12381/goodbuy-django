@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Blacklist(models.Model):
     # owner = models.ForeignKey(
     #     'auth.User', related_name='blacklists', on_delete=models.CASCADE)
@@ -9,6 +10,7 @@ class Blacklist(models.Model):
     def __str__(self):
         return self.user_id
 
+
 class Brand(models.Model):
     name = models.CharField(max_length=100, unique=True)
     corporation = models.CharField(max_length=100)
@@ -16,11 +18,13 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+
 class Category(models.Model):
     name = models.CharField(unique=True, max_length=45)
 
     def __str__(self):
         return self.name
+
 
 class Corporation(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -29,6 +33,7 @@ class Corporation(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Product(models.Model):
     brand = models.CharField(max_length=100)

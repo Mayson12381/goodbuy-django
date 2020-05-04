@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from . import views, mock, feedback, utils
+from . import views, endpoint_functions, utils
 
 router = routers.DefaultRouter()
 router.register('products', views.ProductViewSet)
@@ -15,19 +15,16 @@ urlpatterns = [
 
     path('migrate', utils.migrateBrands),
 
-    path('instant_feedback/<int:barcode>', feedback.instant_feedback),
-    path('instant_feedback/result/<int:barcode>', feedback.instant_feedback_result),
+    path(
+        'instant_feedback/<int:barcode>',
+        endpoint_functions.instant_feedback
+    ),
+    path(
+        'instant_feedback/result/<int:barcode>',
+        endpoint_functions.instant_feedback_result
+    ),
 
-    path('fridge_karma/', feedback.feedback_fridge_karma),
+    path('fridge_karma/', endpoint_functions.feedback_fridge_karma),
 
-    path('products/<int:barcode>/vote/', feedback.voteProduct),
-    
-    # mock endpoints
-    # path('mock/feedback/<int:barcode>', mock.feedback),
-    # path('mock/feedback/result/<int:code>', mock.result),
-    # path('mock/goodbuyDatabase/current_categories/', mock.current_categories),
-    # path('mock/goodbuyDatabase/product_validation/', mock.product_validation),
-    # path('mock/goodbuyDatabase/update_product/', mock.update_product),
-    # path('mock/goodbuyDatabase/fridge_karma_feedback/',
-    #      mock.feedback_fridge_karma),
+    path('products/<int:barcode>/vote/', endpoint_functions.voteProduct),
 ]

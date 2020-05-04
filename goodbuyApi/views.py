@@ -1,13 +1,6 @@
-import json
-
-import requests
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
-from rest_framework import generics, viewsets
-from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework import viewsets
+from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from .models import Blacklist, Brand, Category, Corporation, Product
 from .serializers import (BlacklistSerializer, BrandSerializer,
@@ -24,6 +17,7 @@ class BlacklistViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         return [permission() for permission in [IsAuthenticated]]
 
+
 @permission_classes([AllowAny])
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all().order_by('name')
@@ -35,6 +29,7 @@ class BrandViewSet(viewsets.ModelViewSet):
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
+
 
 @permission_classes([AllowAny])
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -48,6 +43,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
 
+
 @permission_classes([AllowAny])
 class CorporationViewSet(viewsets.ModelViewSet):
     queryset = Corporation.objects.all().order_by('name')
@@ -59,6 +55,7 @@ class CorporationViewSet(viewsets.ModelViewSet):
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
+
 
 @permission_classes([AllowAny])
 class ProductViewSet(viewsets.ModelViewSet):
