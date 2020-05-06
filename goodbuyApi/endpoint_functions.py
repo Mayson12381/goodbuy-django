@@ -3,15 +3,16 @@ import json
 import requests
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny
 
 from . import utils
-from .models import Brand, Corporation, Product, Blacklist
+from .models import Blacklist, Brand, Product
 
 
 def getUserBlacklist(user_id):
     if user_id != '':
-        isBlacklistExisting = Blacklist.objects.filter(user_id=user_id).exists()
+        isBlacklistExisting = Blacklist.objects.filter(
+            user_id=user_id).exists()
         if isBlacklistExisting:
             return Blacklist.objects.get(user_id=user_id).blacklist.split(',')
     return []
@@ -19,7 +20,8 @@ def getUserBlacklist(user_id):
 
 def getExistingProduct(user_id, blacklist, barcode, scanned=False):
     product = Product.objects.get(barcode=barcode)
-    if scanned: product.scanned_counter += 1
+    if scanned:
+        product.scanned_counter += 1
     product.save()
     if product.state == 209:
         return JsonResponse(utils.getFeedbackProduct(product, ''), status=209)
@@ -69,7 +71,12 @@ def instant_feedback(request, barcode):
     # ! get existing Product
     isProductAccessable = Product.objects.filter(barcode=barcode).exists()
     if isProductAccessable:
-        return JsonResponse(getExistingProduct(user_id, blacklist, barcode, scanned=True))
+        return JsonResponse(
+            getExistingProduct(
+                user_id,
+                blacklist,
+                barcode,
+                scanned=True))
 
     # ! OFF Request
     OFFResponse = requests.get(
@@ -128,7 +135,12 @@ def feedback_fridge_karma(request):
         )
         OFFResponse_json = json.loads(OFFResponse.text)
         if OFFResponse_json["status_verbose"] == "product found":
-            responseList.append(getOFFProduct(OFFResponse_json, barcode, blacklist, user_id))
+            responseList.append(
+                getOFFProduct(
+                    OFFResponse_json,
+                    barcode,
+                    blacklist,
+                    user_id))
             continue
 
         else:

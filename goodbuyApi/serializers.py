@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from .models import Product, Corporation, Brand, Category, Blacklist
+from .models import Blacklist, Brand, Category, Corporation, Product
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
